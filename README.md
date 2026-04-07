@@ -89,5 +89,27 @@ python Codes/gis_validation_final.py
 
 ---
 
+## 📈 Visual Results & Validation
+
+### 1. State-Level Model Validation (Prediction vs. Ground Truth)
+The following comparison maps demonstrate the high spatial accuracy of the **Native 365-Day LSTM** across different Indian states. The model's pixel-level inferences (Left) are aggregated and compared against official Government census/survey data (Right).
+
+| Punjab Validation | Uttar Pradesh Validation | Karnataka Validation |
+| :---: | :---: | :---: |
+| ![Punjab](Figures/Comparison_PUNJAB.png) | ![UP](Figures/Comparison_UTTAR_PRADESH.png) | ![Karnataka](Figures/Comparison_KARNATAKA.png) |
+
+### 2. Explainable AI (SHAP) - Decoding the "Rabi Gap"
+Using **SHAP Temporal Analysis**, we proved that the model correctly identifies the **January–March** window as the phenological peak for Wheat. The model ignores noisy monsoon clouds and focuses on the structural growth measured by Radar (Sentinel-1).
+
+![SHAP Phenology](Figures/SHAP_Native_Wheat_Importance.png)
+*Figure: SHAP Temporal Importance Curve showing peak attention during the Wheat heading/flowering stage.*
+
+### 3. Model Training Performance
+Our Optimized Native LSTM achieved superior convergence with **80.8% accuracy** for winter crops, effectively solving the "Rabi Gap" in Indian remote sensing.
+
+![Training Curves](Figures/Native_LSTM_Optimized_Curves.png)
+
+---
+
 ## 📖 Deep Dive
 For a deeper technical dive into the methodology, research limitations addressed, architectural choices, and novelty contributions regarding the Rabi gap, please carefully read the attached `Final_Project_Report.md`.
