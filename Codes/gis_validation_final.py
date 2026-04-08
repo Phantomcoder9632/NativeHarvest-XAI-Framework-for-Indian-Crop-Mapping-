@@ -18,8 +18,8 @@ import torch
 import torch.nn as nn
 
 # ── Paths ───────────────────────────────────────────────────────────────────
-DISTRICT_SHP = r"D:\RemoteSensing-Project\Dataset\DataMeet_India_Maps\maps-master\Districts\Census_2011\2011_Dist.shp"
-MODEL_PATH   = r"D:\RemoteSensing-Project\Models\lstm_native_optimized.pth"
+DISTRICT_SHP = r"D:\RemoteSensing-Project\Dataset\India_Maps\maps-master\Districts\Census_2011\2011_Dist.shp"
+MODEL_PATH   = r"D:\RemoteSensing-Project\Models\lstm_native_best.pth"
 OUT_DIR      = r"D:\RemoteSensing-Project\Results-Validation"
 os.makedirs(OUT_DIR, exist_ok=True)
 

@@ -6,8 +6,8 @@ import numpy as np
 from scipy.interpolate import interp1d
 from sklearn.model_selection import train_test_split
 
-labels_file = r"D:\RemoteSensing-Project\Dataset\CropHarvest\labels.geojson"
-arrays_dir = r"D:\RemoteSensing-Project\Dataset\CropHarvest\features\arrays"
+labels_file = r"D:\RemoteSensing-Project\Dataset\labels.geojson"
+arrays_dir = r"D:\RemoteSensing-Project\Dataset\features\arrays"
 out_dir = r"D:\RemoteSensing-Project\Dataset\processed"
 
 os.makedirs(out_dir, exist_ok=True)

@@ -41,6 +41,11 @@ source .venv/bin/activate
 pip install numpy pandas scikit-learn torch torchvision torchaudio rasterio shapely geopandas shap h5py
 ```
 
+For the interactive dashboard, also install:
+```bash
+pip install streamlit altair
+```
+
 ### 2. Obtaining the Data
 Execute the download scripts to reconstruct the datasets:
 ```bash
@@ -78,6 +83,32 @@ To cross-reference the AI's inferences against simulated Indian economic surveys
 python Codes/gis_validation_final.py
 ```
 *Generated choropleth maps will be saved in `Results-Validation/`, visually demonstrating crop distributions side-by-side with ground truth metrics.*
+
+### 6. Launch the Prediction Dashboard
+To open a runnable UI for manual input, CSV upload, prediction output, and graphs:
+```bash
+python -m pip install -r requirements-app.txt
+python run_app.py
+```
+
+CSV input should include these columns:
+```text
+NDVI,VV,VH
+0.21,-13.2,-18.1
+0.24,-13.4,-18.0
+...
+```
+
+You can also try the included sample file:
+```text
+sample_input.csv
+```
+
+The dashboard will:
+- let you create a field profile with sliders or upload a CSV
+- show the sensor curves before inference
+- predict the crop class using the trained LSTM when model weights are available
+- display confidence graphs and a ranked prediction table
 
 ---
 

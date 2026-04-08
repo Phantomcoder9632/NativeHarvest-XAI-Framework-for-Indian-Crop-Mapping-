@@ -10,24 +10,26 @@ models_dir = r"D:\RemoteSensing-Project\Models"
 plots_dir  = r"D:\RemoteSensing-Project\Results-plots"
 
 INPUT_SIZE = 3
-HIDDEN_SIZE = 64
+HIDDEN_SIZE = 128
 NUM_CLASSES = 14
+DROPOUT = 0.3
 # Our bands were extracted in order: [17, 0, 1] which is NDVI, VV, VH
 FEATURE_NAMES = ["NDVI", "VV", "VH"]
 
 class CropClassifierLSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, num_classes):
+    def __init__(self, input_size, hidden_size, num_classes, dropout=0.3):
         super(CropClassifierLSTM, self).__init__()
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers=1, batch_first=True)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers=2, batch_first=True, dropout=dropout)
+        self.dropout = nn.Dropout(dropout)
         self.fc = nn.Linear(hidden_size, num_classes)
         
     def forward(self, x):
         out, _ = self.lstm(x)
-        return self.fc(out[:, -1, :])
+        return self.fc(self.dropout(out[:, -1, :]))
 
 device = torch.device('cpu') # Avoid cuda runtime RNN errors with SHAP
-model = CropClassifierLSTM(INPUT_SIZE, HIDDEN_SIZE, NUM_CLASSES).to(device)
-model.load_state_dict(torch.load(os.path.join(models_dir, "lstm_best.pth"), map_location=device, weights_only=True))
+model = CropClassifierLSTM(INPUT_SIZE, HIDDEN_SIZE, NUM_CLASSES, DROPOUT).to(device)
+model.load_state_dict(torch.load(os.path.join(models_dir, "lstm_native_best.pth"), map_location=device, weights_only=True))
 model.eval()
 
 print("Loading data for SHAP interpretation...")

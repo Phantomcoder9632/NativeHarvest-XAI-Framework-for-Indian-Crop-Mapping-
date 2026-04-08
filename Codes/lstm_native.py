@@ -11,7 +11,7 @@ from torch.utils.data import TensorDataset, DataLoader
 import matplotlib.pyplot as plt
 
 # ─── Paths ──────────────────────────────────────────────────────────────────
-data_dir   = r"D:\RemoteSensing-Project\Dataset\native_processed"
+data_dir   = r"D:\RemoteSensing-Project\Dataset\processed"
 models_dir = r"D:\RemoteSensing-Project\Models"
 plots_dir  = r"D:\RemoteSensing-Project\Results-plots"
 os.makedirs(models_dir, exist_ok=True)
@@ -34,7 +34,7 @@ y_val   = np.load(os.path.join(data_dir, "y_val.npy"))
 X_test  = np.load(os.path.join(data_dir, "X_test.npy"))
 y_test  = np.load(os.path.join(data_dir, "y_test.npy"))
 
-NUM_CLASSES = len(np.unique(y_train))
+NUM_CLASSES = int(max(y_train.max(), y_val.max(), y_test.max())) + 1
 print(f"  Train: {len(X_train)}   Val: {len(X_val)}   Test: {len(X_test)}")
 print(f"  Number of crop classes  : {NUM_CLASSES}")
 print(f"  Tensor shape per sample : {X_train.shape[1:]}")
